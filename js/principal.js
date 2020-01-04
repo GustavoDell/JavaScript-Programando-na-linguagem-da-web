@@ -44,8 +44,11 @@ for(var i = 0; i < pacientes.length; i++){
     }
 }
 
-titulo.addEventListener("click", function(){console.log("Olha só posso chamar uma função anonima.");}/*Fazer uma função diretamente 
-no parametro do evento é conhecida como função anonima*/);/*addEventListener() é um escutador de evento do JavaScript(Ele escutado os eventos do usuário
+titulo.addEventListener("click", function(){
+        console.log("Olha só posso chamar uma função anonima.");
+    }/*Fazer uma função diretamente 
+no parametro do evento é conhecida como função anonima*/
+);/*addEventListener() é um escutador de evento do JavaScript(Ele escutado os eventos do usuário
 (interações) ele fica ouvindo os eventos de qualque elemento hrml que for selecionado)*/
 
 function mostraMensagem(){
@@ -53,10 +56,12 @@ function mostraMensagem(){
 }/*Isto é uma função nomeada, que uma função que é criada do lado de fora do evento evento*/
 
 
-var botaoAdicionar = document.querySelector("#adicionar-paciente")
+var botaoAdicionar = document.querySelector("#adicionar-paciente");
 
-botaoAdicionar.addEventListener("click", function(){
-    console.log("Oi, cliquei no botão;");
+botaoAdicionar.addEventListener("click", function(event){
+    
+    event.preventDefault();// Função que previne o comportamento padrão do browser(Está função remove o comportamento padrão já inserido no elemento)
+    console.log("Oi eu sou um botão e fui clicado")
 });
 
 
