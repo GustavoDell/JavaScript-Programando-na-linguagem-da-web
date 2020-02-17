@@ -39,11 +39,15 @@ for(var i = 0; i < pacientes.length; i++){
     }
 
     if(alturaEhValida && pesoEhValido){
-        var imc =  peso/(altura * altura);
-        tdImc.textContent = imc.toFixed(2);//A função toFixed() limita a quantidade de casas decimais.
+        var imc =  calculaImc(peso, altura);
+        tdImc.textContent = imc;//A função toFixed() limita a quantidade de casas decimais.
     }
 }
-
+function calculaImc(peso, altura){
+    var imc = 0
+    imc = peso/(altura * altura);
+    return imc.toFixed(2);
+}
 titulo.addEventListener("click", function(){
         console.log("Olha só posso chamar uma função anonima.");
     }/*Fazer uma função diretamente 

@@ -5,34 +5,56 @@ botaoAdicionar.addEventListener("click", function(event){
     event.preventDefault();// Função que previne o comportamento padrão do browser(Está função remove o comportamento padrão já inserido no elemento)
     
     var form = document.querySelector("#form-adiciona");
-
-    var nome = form.nome.value;
-    var peso = form.peso.value;
-    var altura = form.altura.value;
-    var gordura = form.gordura.value;
+   
+    // Extraindo informações do paciente do form
+    var paciente = obtemPacienteDoFormulario(form);
     
-    var pacienteTr = document.createElement("tr");
-    
-    var nomeTd = document.createElement("td");//criado tags no html  via javascript
-    var pesoTd = document.createElement("td");
-    var alturaTd = document.createElement("td");
-    var gorduraTd = document.createElement("td");
-    var imcTd = document.createElement("td");
+   //cria a tr e td do paciente
+    var pacienteTr = montaTr(paciente);
 
-    nomeTd.textContent = nome;
-    pesoTd.textContent = peso;
-    alturaTd.textContent = altura;
-    gorduraTd.textContent= gordura;
-
-    pacienteTr.appendChild(nomeTd);//inserindo as tags filhas na tag pai
-    pacienteTr.appendChild(pesoTd);
-    pacienteTr.appendChild(alturaTd);
-    pacienteTr.appendChild(gorduraTd);
-
+    //adicionando o paciente na tabela
     var tabela = document.querySelector("#tabela-pacientes");
 
     tabela.appendChild(pacienteTr);
 
     console.log(pacienteTr);
 
+    form.reset()//Função reset() limpa os campos de um form com conteudo que foi passado
+
 });
+
+//Extraindo infomações do form
+function obtemPacienteDoFormulario(form){
+    //criando um objeto paciente
+    
+    var paciente = {
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
+        imc: calculaImc(form.peso.value, form.altura.value),
+    }
+   
+    return paciente;
+}
+function montaTr(paciente){
+    
+    var pacienteTr = document.createElement("tr");
+    pacienteTr.classList.add("paciente")//Adicionado uma class na tag pelo metodo classList
+    
+    pacienteTr.appendChild(montaTd(paciente.nome, "info-nome"));
+    pacienteTr.appendChild(montaTd(paciente.peso, "info-peso"));
+    pacienteTr.appendChild(montaTd(paciente.altura, "info-altura"));
+    pacienteTr.appendChild(montaTd(paciente.gordura, "info-gordura"));
+    pacienteTr.appendChild(montaTd(paciente.imc, "info-imc"));
+    
+    return pacienteTr;
+}
+function montaTd(dado, classe){
+    
+    var td = document.createElement("td")
+    td.textContent = dado;
+    td.classList.add(classe);
+
+    return td
+}
