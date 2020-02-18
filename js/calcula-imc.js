@@ -19,35 +19,51 @@ for(var i = 0; i < pacientes.length; i++){
 
     var tdImc = paciente.querySelector(".info-imc");
 
-    var pesoEhValido = true;
-    var alturaEhValida = true;
+    var pesoEhValido = validaPeso(peso);
+    var alturaEhValida = validaAltura(altura);
 
-    if(peso <= 0 || peso >= 1000 ){
-        console.log("Peso inválido");
-        pesoEhValido = false;
+    if(!pesoEhValido){
+    
         tdPeso.textContent = "Peso inválido";
         //Jeito correto de se fazer(boa pratica)
         paciente.classList.add("paciente-invalido");//A propriedade 'classList' retorna todas as classes de um objeto e tambem alguns metodos.
         //Metodo 'add' noz permite adcionar uma nova classe aquele objeto.
     }
-    if(altura <= 0 || altura >= 3.00 ){
-        console.log("Altura inválida");
-        alturaEhValida = false;
+    if(!alturaEhValida){
+
         tdAltura.textContent = "Altura inválida";//A propriedade textCorent serve também para se alterar o conteudo das tags
         //Jeito errado de se fazer(má pratica)
         paciente.style.backgroundColor = "orange";//A propriedade modifica o estilo da pagina html, e após isso é possivel escolher qual estilo deseja modificar
     }
 
     if(alturaEhValida && pesoEhValido){
-        var imc =  calculaImc(peso, altura);
+        var imc = calculaImc(peso, altura);
         tdImc.textContent = imc;//A função toFixed() limita a quantidade de casas decimais.
     }
 }
+
 function calculaImc(peso, altura){
     var imc = 0
     imc = peso/(altura * altura);
     return imc.toFixed(2);
 }
+
+function validaPeso(peso){
+    if(peso > 0 && peso < 1000){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+function validaAltura(altura){
+    if(altura > 0 && altura <= 3.00){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 titulo.addEventListener("click", function(){
         console.log("Olha só posso chamar uma função anonima.");
     }/*Fazer uma função diretamente 
