@@ -13,7 +13,6 @@ botaoAdicionar.addEventListener("click", function(event){
     var pacienteTr = montaTr(paciente);
     //chamando a função valid paciente
     var erros = validaPaciente(paciente);
-    
    
     if(erros.length > 0){
         //chamando a função exibe mensagem de erro
