@@ -23,8 +23,6 @@ campoFiltro.addEventListener("input", function(){
             var paciente = pacientes[i]
             paciente.classList.remove("invisivel");
         }
-    }
-
-    
+    } 
     
 });
