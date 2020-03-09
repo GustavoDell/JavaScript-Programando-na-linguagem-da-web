@@ -10,7 +10,7 @@ botaoAdicionar.addEventListener("click", function(event){
     var paciente = obtemPacienteDoFormulario(form);
     
    //cria a tr e td do paciente
-    var pacienteTr = montaTr(paciente);
+
     //chamando a função valid paciente
     var erros = validaPaciente(paciente);
    
@@ -22,15 +22,22 @@ botaoAdicionar.addEventListener("click", function(event){
 
     
     //adicionando o paciente na tabela
-    var tabela = document.querySelector("#tabela-pacientes");
+    adicionaPacienteNaTabela(paciente);
+
     tabela.appendChild(pacienteTr);
     form.reset()//Função reset() limpa os campos de um form com conteudo que foi passado
-    
     //removendo mensagens de erro caso o paciente seja válido
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
 
 });
+
+function adicionaPacienteNaTabela(paciente){
+    var pacienteTr = montaTr(paciente);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
+
 //Esta função cria um li para cada mensagem de erro contida no array
 function exibeMensagensDeErro(erros){
     var ul = document.querySelector("#mensagens-erro");
